@@ -42,4 +42,46 @@ create table profesor(
     foreign key (id_departamento) references departamento(id)
 );
 
+-- Crear tabla de Alumno Matriculado
+create table alumno_se_matricula_asignatura(
+	id_alumno int,
+    id_asignatura int not null,
+    id_curso_escolar int not null,
+    foreign key (id_curso_escolar) references curso_escolar(id),
+    foreign key (id_asignatura) references asignatura(id),
+    foreign key(id_alumno) references persona(id)
+);
+
+-- Crear tabla de curso escolar
+create table curso_escolar(
+	id int primary key,
+    ayno_inicio YEAR(4) not null,
+    ayno_fin YEAR(4) not null
+);
+
+-- Crear tabla de asignatura
+create table asignatura(
+	id int auto_increment primary key,
+    nombre varchar(100) not null,
+    creditos float not null,
+    tipo enum ('Basica','Optativas', 'Obligatorias') not null,
+    curso tinyint(3) not null,
+    cuatrimestre TINYINT(3) not null,
+    id_Profesor int,
+    id_grado int,
+    foreign key(id_profesor)references profesor(id_profesor),
+    foreign key(id_grado)references grado(id)
+);
+
+-- Crear tabla de grado
+create table grado(
+	id int primary key,
+    nombre varchar(100) not null
+);
+
+show tables;
+
+drop table Curso_Escolar;
+drop table asigntura;
+
 -- Desarrollado por Juan Felipe Rubio Sanabria / ID.1.146.334.004
